@@ -1,0 +1,21 @@
+@import "./components/all";
+
+html {
+    overflow: hidden;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+html, body, #root, #root > div {
+    height: 100%;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
