@@ -1,16 +1,14 @@
 import { useSelector } from "react-redux";
-import {ItemsProfile} from './ItemProfile';
+import { ItemsProfile } from "./ItemProfile";
 
 const Schedule = () => {
-    const schedule = useSelector((state) => state.schedule);
-    
-    return (
-        <div className="schedule">
-            <ItemsProfile data={schedule}/>
-        </div>
-    )
-}
+  const schedule = useSelector((state) => state.schedule);
 
-export {
-    Schedule
+  return (
+    <div className="schedule">
+      <ItemsProfile data={schedule} />
+    </div>
+  );
 };
+
+export { Schedule };

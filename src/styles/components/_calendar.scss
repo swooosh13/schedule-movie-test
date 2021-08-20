@@ -1,11 +1,11 @@
 .day {
-  justify-self: center;
-  width: 100%;
-  height: 2.5rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  justify-self: center;
+  width: 100%;
+  height: 2.5rem;
 
   font-weight: 600;
   color: #4d5155;
@@ -39,25 +39,25 @@
 }
 
 .calendar__body {
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-row-gap: 0rem;
+  width: 100%;
 }
 
 .calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   border-top: 1px solid #e9e9e9;
   font-size: 14px;
   color: #4d5155;
   height: 2rem;
   font-weight: 600;
-  
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .arrow {
-    border: none;
-    background: none;
+  border: none;
+  background: none;
 }

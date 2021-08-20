@@ -21,7 +21,6 @@ const ItemsProfile = ({ data }) => {
     setShow(!show);
   };
 
-  const count = data.schedule.length;
   const date = data.date;
   return (
     <div className="profile">

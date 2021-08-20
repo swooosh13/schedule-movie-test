@@ -1,16 +1,18 @@
 .header {
-  background: #ededed;
-  color: #333333;
-  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background: #ededed;
+  color: #333333;
+  font-size: 12px;
 }
 
 .back-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+
   position: absolute;
   left: 15px;
   border: none;
