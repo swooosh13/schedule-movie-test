@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import moment from "moment";
 
 const ItemsProfile = ({ data }) => {
   const [show, setShow] = useState(false);
@@ -21,30 +22,64 @@ const ItemsProfile = ({ data }) => {
     setShow(!show);
   };
 
-  const date = data.date;
+  const date = moment(data.date)
+    .toDate()
+    .toString()
+    .split(" ")
+    .slice(1, 4)
+    .join(" ");
+
+  console.log(items);
+
   return (
     <div className="profile">
       <div className="profile__date">{date}</div>
       {items.map((item) => (
-        <div className="profile__item item">
-          <img src={item.show.image.medium} width={80} alt="item" />
-          <div className="item__info">
-            <div>
-              <div>{item.show.name}</div>
-              <div className="item__premiered">
-                {item.show.premiered.split("-")[0]}
-              </div>
-            </div>
-            <div className="item__sn">
-              <div>season: {item.season}</div>
-              <div>episode: {item.number}</div>
-            </div>
-          </div>
-        </div>
+        <Item
+          key={item.id}
+          imgMedium={item.show.image?.medium || "#"}
+          imgOriginal={item.show.image?.original || "#"}
+          name={item.show.name}
+          season={item.season}
+          number={item.number}
+          premiered={item.show.premiered}
+        />
       ))}
       <div className="profile__more" onClick={handleShow}>
-        {show ? 'close' : 'show all'}
+        {show ? "close" : "show all"}
       </div>
+    </div>
+  );
+};
+
+const Item = ({ imgOriginal, imgMedium, name, season, number, premiered }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  return (
+    <div className="profile__item item">
+      {showModal ? (
+        <div className="image-original" onClick={toggleModal}>
+          <img src={imgOriginal} width={300} alt="" />
+        </div>
+      ) : (
+        <>
+          <img src={imgMedium} width={80} alt="item" onClick={toggleModal} />
+          <div className="item__info">
+            <div>
+              <div>{name}</div>
+              <div className="item__premiered">{premiered.split("-")[0]}</div>
+            </div>
+            <div className="item__sn">
+              <div>Season: {season}</div>
+              <div>Episode: {number}</div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
