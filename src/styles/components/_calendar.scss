@@ -34,6 +34,10 @@
   }
 }
 
+.calendar {
+  margin-bottom: 52px;
+}
+
 .calendar__body {
   width: 100%;
   display: grid;
@@ -42,10 +46,18 @@
 }
 
 .calendar__header {
-  background: #ededed;
-  font-size: 16px;
+  border-top: 1px solid #e9e9e9;
+  font-size: 14px;
+  color: #4d5155;
+  height: 2rem;
   font-weight: 600;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.arrow {
+    border: none;
+    background: none;
 }

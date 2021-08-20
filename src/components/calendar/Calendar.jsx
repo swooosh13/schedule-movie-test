@@ -1,11 +1,22 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import moment from "moment";
 
 import { buildCalendar } from "./build";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItems } from "../../redux/reducers/schedule";
 
 const Calendar = () => {
+  const dispatch = useDispatch();
+  const date = useSelector((state) => state.schedule.date);
   const [calendar, setCalendar] = useState([]);
   const [value, setValue] = useState(moment());
+
+  useEffect(() => {
+    if (!!date) {
+      setValue(moment(date));
+    }
+  }, []);
 
   useEffect(() => {
     setCalendar(buildCalendar(value));
@@ -46,10 +57,21 @@ const Calendar = () => {
     return value.clone().add(1, "month");
   }
 
+  const handleClickDate = (day) => {
+    setValue(day);
+    const date = convertDateToRequest(day);
+    dispatch(fetchItems(date));
+  };
+
+  const convertDateToRequest = (day) => {
+    const format = "YYYY-MM-DD";
+    return day.format(format);
+  };
+
   return (
     <div className="calendar">
       <div className="calendar__header">
-        <button class="arrow" onClick={() => setValue(prevMonth())}>
+        <button className="arrow" onClick={() => setValue(prevMonth())}>
           <img src="icons/keyboard_arrow_left.svg" alt="prev month" />
         </button>
 
@@ -57,26 +79,32 @@ const Calendar = () => {
           {currMonthName()} {currYear()}
         </div>
 
-        <button class="arrow" onClick={() => setValue(nextMonth())}>
+        <button className="arrow" onClick={() => setValue(nextMonth())}>
           <img src="icons/keyboard_arrow_right.svg" alt="next month" />
         </button>
       </div>
       <div className="calendar__body">
         {calendar.map((week) => (
-          <>
+          <React.Fragment key={week}>
             {week.map((day) => (
               <div
+                key={day}
                 className={"day" + " " + dayStyles(day)}
-                onClick={() => setValue(day)}
+                onClick={() => handleClickDate(day)}
               >
                 {day.format("D").toString()}
               </div>
             ))}
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>
   );
 };
 
-export { Calendar };
+const CalendarContainer = () => {
+  const loaded = useSelector((state) => state.schedule.loaded);
+  return <>{loaded ? <Redirect to="/schedule" /> : <Calendar />}</>;
+};
+
+export { CalendarContainer as Calendar };

@@ -1,4 +1,5 @@
 @import "./components/all";
+@import "./pages/home";
 
 html {
     overflow: hidden;
@@ -14,8 +15,8 @@ html, body, #root, #root > div {
     height: 100%;
 }
 
-.App {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+// .App {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+// }
