@@ -29,8 +29,6 @@ const ItemsProfile = ({ data }) => {
     .slice(1, 4)
     .join(" ");
 
-  console.log(items);
-
   return (
     <div className="profile">
       <div className="profile__date">{date}</div>
@@ -67,7 +65,7 @@ const Item = ({ imgOriginal, imgMedium, name, season, number, premiered }) => {
         </div>
       ) : (
         <>
-          <img src={imgMedium} width={80} alt="item" onClick={toggleModal} />
+          <img src={imgMedium} width={80} alt="" onClick={toggleModal} />
           <div className="item__info">
             <div>
               <div>{name}</div>
